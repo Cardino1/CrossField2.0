@@ -2,9 +2,11 @@ import Link from "next/link";
 import { CollaborationFilters } from "@/components/collaboration-filters";
 import { CollaborationCard } from "@/components/collaboration-card";
 import { Paginator } from "@/components/paginator";
+import { EmptyState } from "@/components/empty-state";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
 import { CollaborationStatus, CollaborationType } from "@prisma/client";
+import { FiUsers } from "react-icons/fi";
 
 const PAGE_SIZE = 6;
 
@@ -53,12 +55,12 @@ export default async function CollaborationsPage({
     <div className="container-grid space-y-10 py-12">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-slate-900">Collaborations</h1>
-          <p className="text-sm text-slate-500">Curated requests ready for co-builders, researchers, and founders.</p>
+          <h1 className="text-4xl font-bold text-slate-900">Collaborations</h1>
+          <p className="text-lg text-slate-600">Curated requests ready for co-builders, researchers, and founders.</p>
         </div>
         <Link
           href="/collaborations/new"
-          className="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/20 hover:bg-brand-500"
+          className="btn-primary"
         >
           Publish a Collaboration
         </Link>
@@ -110,8 +112,12 @@ export default async function CollaborationsPage({
           />
         ))}
         {items.length === 0 && (
-          <div className="col-span-full rounded-3xl border border-dashed border-slate-200 p-12 text-center text-sm text-slate-500">
-            No collaborations found with the current filters.
+          <div className="col-span-full">
+            <EmptyState
+              icon={<FiUsers className="h-12 w-12 text-slate-400" />}
+              title="No collaborations found"
+              description="Try adjusting your filters or check back later for new opportunities."
+            />
           </div>
         )}
       </div>

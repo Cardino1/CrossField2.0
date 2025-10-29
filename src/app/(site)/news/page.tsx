@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NewsCard } from "@/components/news-card";
+import { EmptyState } from "@/components/empty-state";
+import { FiRss } from "react-icons/fi";
 
 export const dynamic = "force-dynamic";
 
@@ -11,9 +13,9 @@ export default async function NewsIndexPage() {
 
   return (
     <div className="container-grid space-y-8 py-12">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-semibold text-slate-900">CrossField News</h1>
-        <p className="text-sm text-slate-500">
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold text-slate-900">CrossField News</h1>
+        <p className="text-lg text-slate-600">
           Stories, launches, and noteworthy drops from the CrossField collective.
         </p>
       </div>
@@ -29,8 +31,12 @@ export default async function NewsIndexPage() {
           />
         ))}
         {news.length === 0 && (
-          <div className="col-span-full rounded-3xl border border-dashed border-slate-200 p-12 text-center text-sm text-slate-500">
-            No news yet. Stay tuned.
+          <div className="col-span-full">
+            <EmptyState
+              icon={<FiRss className="h-12 w-12 text-slate-400" />}
+              title="No news yet"
+              description="Stay tuned for stories, launches, and noteworthy updates from the CrossField collective."
+            />
           </div>
         )}
       </div>

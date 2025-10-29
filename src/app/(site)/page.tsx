@@ -1,7 +1,9 @@
 import { Hero } from "@/components/hero";
 import { PostCard } from "@/components/post-card";
 import { NewsCard } from "@/components/news-card";
+import { EmptyState } from "@/components/empty-state";
 import { prisma } from "@/lib/prisma";
+import { FiFileText, FiRss } from "react-icons/fi";
 
 export const dynamic = "force-dynamic";
 
@@ -37,13 +39,15 @@ export default async function HomePage() {
             />
           ))}
           {posts.length === 0 && (
-            <div className="card p-10 text-center text-sm text-slate-500">
-              No posts published yet. Check back soon.
-            </div>
+            <EmptyState
+              icon={<FiFileText className="h-12 w-12 text-slate-400" />}
+              title="No posts yet"
+              description="Check back soon for curated content and insights."
+            />
           )}
         </div>
-        <aside className="space-y-4">
-          <h2 className="text-lg font-semibold text-slate-900">Recent News</h2>
+        <aside className="space-y-6">
+          <h2 className="text-2xl font-bold text-slate-900">Recent News</h2>
           <div className="grid gap-4">
             {news.map((item) => (
               <NewsCard
@@ -56,9 +60,11 @@ export default async function HomePage() {
               />
             ))}
             {news.length === 0 && (
-              <div className="rounded-3xl border border-dashed border-slate-200 p-6 text-sm text-slate-500">
-                No news yet.
-              </div>
+              <EmptyState
+                icon={<FiRss className="h-8 w-8 text-slate-400" />}
+                title="No news yet"
+                description="Stay tuned for updates."
+              />
             )}
           </div>
         </aside>
