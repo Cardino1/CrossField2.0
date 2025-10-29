@@ -17,18 +17,21 @@ export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/90 backdrop-blur-xl transition-all duration-200">
       <div className="container-grid">
         <div className="flex items-center justify-between py-4">
-          <Link href="/" className="text-xl font-semibold tracking-tight text-slate-900">
-            CrossField
+          <Link href="/" className="group flex items-center gap-2">
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-brand-500 to-blue-600 shadow-lg transition-transform duration-200 group-hover:scale-110" />
+            <span className="text-xl font-bold tracking-tight text-slate-900">
+              CrossField
+            </span>
           </Link>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+          <nav className="hidden items-center gap-2 text-sm font-medium text-slate-600 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-full px-4 py-2 transition hover:bg-slate-100 hover:text-slate-900"
+                className="rounded-xl px-4 py-2 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900"
               >
                 {item.label}
               </Link>
@@ -37,13 +40,13 @@ export function Navbar() {
           <div className="hidden items-center gap-3 md:flex">
             <button
               onClick={() => setOpen(true)}
-              className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:bg-slate-700"
+              className="btn-primary"
             >
               Get Updates
             </button>
           </div>
           <button
-            className="rounded-full border border-slate-200 p-2 text-slate-600 md:hidden"
+            className="rounded-xl border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
             onClick={() => setDrawerOpen((prev) => !prev)}
             aria-label="Open navigation"
           >
@@ -54,7 +57,7 @@ export function Navbar() {
       <div
         className={clsx(
           "md:hidden transition-all duration-300",
-          drawerOpen ? "max-h-96 border-t border-slate-200 bg-white" : "max-h-0 overflow-hidden"
+          drawerOpen ? "max-h-96 border-t border-slate-200 bg-white/95 backdrop-blur-xl" : "max-h-0 overflow-hidden"
         )}
       >
         <div className="container-grid flex flex-col gap-2 py-4">
@@ -62,7 +65,7 @@ export function Navbar() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100"
+              className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100"
               onClick={() => setDrawerOpen(false)}
             >
               {item.label}
@@ -73,7 +76,7 @@ export function Navbar() {
               setOpen(true);
               setDrawerOpen(false);
             }}
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white"
+            className="btn-primary mt-2"
           >
             Get Updates
           </button>

@@ -7,11 +7,11 @@
 }
 
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 text-slate-900 antialiased;
 }
 
 a {
-  @apply text-brand-600 hover:text-brand-500 transition-colors;
+  @apply text-brand-600 hover:text-brand-700 transition-all duration-200;
 }
 
 .container-grid {
@@ -19,7 +19,7 @@ a {
 }
 
 .card {
-  @apply rounded-3xl border border-slate-200 bg-white/90 shadow-soft backdrop-blur;
+  @apply rounded-2xl border border-slate-200/60 bg-white shadow-soft backdrop-blur-sm transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1;
 }
 
 input[type="text"],
@@ -27,23 +27,23 @@ input[type="email"],
 input[type="password"],
 textarea,
 select {
-  @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm transition focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-200;
+  @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-200 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-100;
 }
 
 button {
-  @apply disabled:cursor-not-allowed disabled:opacity-60;
+  @apply disabled:cursor-not-allowed disabled:opacity-60 transition-all duration-200;
 }
 
 .badge {
-  @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide;
+  @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide transition-all duration-200;
 }
 
 .badge-soft {
-  @apply badge bg-brand-50 text-brand-600;
+  @apply badge bg-gradient-to-r from-brand-50 to-blue-50 text-brand-700 ring-1 ring-brand-200/50;
 }
 
 .badge-muted {
-  @apply badge bg-slate-100 text-slate-600;
+  @apply badge bg-slate-100 text-slate-600 ring-1 ring-slate-200/50;
 }
 
 .table-base {
@@ -59,9 +59,21 @@ button {
 }
 
 .modal-overlay {
-  @apply fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm;
+  @apply fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm animate-fade-in;
 }
 
 .modal-card {
-  @apply card fixed left-1/2 top-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 p-8;
+  @apply card fixed left-1/2 top-1/2 z-50 w-[90%] max-w-md -translate-x-1/2 -translate-y-1/2 p-8 animate-scale-in;
+}
+
+.btn-primary {
+  @apply rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/30 transition-all duration-200 hover:shadow-xl hover:shadow-brand-600/40 hover:-translate-y-0.5 active:translate-y-0;
+}
+
+.btn-secondary {
+  @apply rounded-xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all duration-200 hover:bg-slate-50 hover:shadow-md;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-brand-600 to-blue-600 bg-clip-text text-transparent;
 }
