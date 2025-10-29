@@ -6,7 +6,7 @@ CrossField is a Next.js application that curates collaboration opportunities, or
 
 - [Next.js 14](https://nextjs.org/) with the App Router and TypeScript
 - [Tailwind CSS](https://tailwindcss.com/) for styling
-- [Prisma](https://www.prisma.io/) ORM with PostgreSQL (required for enums and array columns)
+- [Prisma](https://www.prisma.io/) ORM with SQLite for local development (PostgreSQL in production)
 - [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) validation
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs) for simple credential authentication
 
@@ -26,7 +26,7 @@ CrossField is a Next.js application that curates collaboration opportunities, or
    cp .env.example .env
    ```
 
-   Update the values as needed. The app expects a PostgreSQL `DATABASE_URL`. Supply the admin credentials:
+   Update the values as needed. A SQLite database is configured by default. Supply the admin credentials:
 
    - `ADMIN_USERNAME` – defaults to `Admin`
    - `ADMIN_PASSWORD_HASH` – bcrypt hash of the admin password
@@ -75,6 +75,5 @@ CrossField is a Next.js application that curates collaboration opportunities, or
 - Update `DATABASE_URL` to point at your production PostgreSQL instance.
 - Keep `ADMIN_JWT_SECRET` strong and private.
 - Set `ADMIN_PASSWORD_HASH` from the generated script output.
-- Dependency installs run `scripts/prepare-build.js`, which removes any lingering `next.config.ts` and sets a placeholder `DATABASE_URL` so Prisma can generate its client before builds kick off (Vercel included).
 
 Enjoy curating collaborations with CrossField!

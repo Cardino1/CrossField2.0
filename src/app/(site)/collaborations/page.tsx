@@ -4,11 +4,7 @@ import { CollaborationCard } from "@/components/collaboration-card";
 import { Paginator } from "@/components/paginator";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
-import {
-  COLLABORATION_STATUSES,
-  CollaborationStatus,
-  CollaborationType,
-} from "@/lib/collaboration-constants";
+import { CollaborationStatus, CollaborationType } from "@prisma/client";
 
 const PAGE_SIZE = 6;
 
@@ -25,7 +21,7 @@ export default async function CollaborationsPage({
   const adminSession = await getAdminSession();
   const statusParam = typeof searchParams.status === "string" ? searchParams.status : undefined;
 
-  const where: Record<string, unknown> = {};
+  const where: any = {};
   if (query) {
     where.OR = [
       { title: { contains: query, mode: "insensitive" } },
@@ -73,7 +69,7 @@ export default async function CollaborationsPage({
       {adminSession && (
         <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
           <span>Status filter:</span>
-          {COLLABORATION_STATUSES.map((status) => {
+          {(["PENDING", "APPROVED", "REJECTED"] as const).map((status) => {
             const active = statusParam === status;
             const params = new URLSearchParams();
             if (query) params.set("q", query);
@@ -106,14 +102,9 @@ export default async function CollaborationsPage({
           <CollaborationCard
             key={collaboration.id}
             collaboration={{
-              id: collaboration.id,
-              title: collaboration.title,
-              type: collaboration.type as CollaborationType,
-              organization: collaboration.organization,
-              description: collaboration.description,
-              link: collaboration.link,
+              ...collaboration,
               createdAt: collaboration.createdAt,
-              status: collaboration.status as CollaborationStatus,
+              updatedAt: collaboration.updatedAt,
             }}
             showStatus={Boolean(adminSession)}
           />

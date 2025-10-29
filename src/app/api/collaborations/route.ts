@@ -2,15 +2,10 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
-import {
-  COLLABORATION_STATUSES,
-  COLLABORATION_TYPES,
-  CollaborationStatus,
-  CollaborationType,
-} from "@/lib/collaboration-constants";
+import { CollaborationStatus, CollaborationType } from "@prisma/client";
 
 const createSchema = z.object({
-  type: z.enum(COLLABORATION_TYPES),
+  type: z.enum(["RESEARCH", "OPEN_SOURCE_PROJECT", "STARTUP_COFOUNDER"]),
   title: z.string().min(3).max(120),
   fullName: z.string().min(2).max(120),
   organization: z.string().max(120).optional(),
@@ -40,7 +35,7 @@ export async function GET(request: Request) {
     where.type = { in: types };
   }
   if (session) {
-    if (statusQuery && COLLABORATION_STATUSES.includes(statusQuery as CollaborationStatus)) {
+    if (statusQuery && ["PENDING", "APPROVED", "REJECTED"].includes(statusQuery)) {
       where.status = statusQuery as CollaborationStatus;
     }
   } else {

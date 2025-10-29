@@ -1,4 +1,4 @@
-import { CollaborationType } from "@/lib/collaboration-constants";
+import { CollaborationType } from "@prisma/client";
 
 const typeConfig: Record<CollaborationType, { label: string; className: string }> = {
   RESEARCH: { label: "Research", className: "bg-blue-50 text-blue-600" },

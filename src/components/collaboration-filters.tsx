@@ -3,17 +3,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 import clsx from "clsx";
-import { COLLABORATION_TYPES, CollaborationType } from "@/lib/collaboration-constants";
+import { CollaborationType } from "@prisma/client";
 
-const typeOptions: { value: CollaborationType; label: string }[] = COLLABORATION_TYPES.map((type) => ({
-  value: type,
-  label:
-    type === "RESEARCH"
-      ? "Research"
-      : type === "OPEN_SOURCE_PROJECT"
-        ? "Open Source Project"
-        : "Startup Co-Founder",
-}));
+const typeOptions: { value: CollaborationType; label: string }[] = [
+  { value: "RESEARCH", label: "Research" },
+  { value: "OPEN_SOURCE_PROJECT", label: "Open Source Project" },
+  { value: "STARTUP_COFOUNDER", label: "Startup Co-Founder" },
+];
 
 export function CollaborationFilters() {
   const router = useRouter();

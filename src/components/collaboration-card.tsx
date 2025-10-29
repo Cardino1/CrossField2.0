@@ -1,12 +1,9 @@
 import { formatDistanceToNow } from "date-fns";
-import { CollaborationRecord, CollaborationStatus } from "@/lib/collaboration-constants";
+import { Collaboration, CollaborationStatus } from "@prisma/client";
 import { TypeBadge } from "./type-badge";
 
 export type CollaborationCardProps = {
-  collaboration: Pick<
-    CollaborationRecord,
-    "id" | "title" | "type" | "organization" | "description" | "link" | "createdAt" | "status"
-  >;
+  collaboration: Pick<Collaboration, "id" | "title" | "type" | "organization" | "description" | "link" | "createdAt" | "status">;
   showStatus?: boolean;
 };
 
