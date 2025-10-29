@@ -75,6 +75,5 @@ CrossField is a Next.js application that curates collaboration opportunities, or
 - Update `DATABASE_URL` to point at your production PostgreSQL instance.
 - Keep `ADMIN_JWT_SECRET` strong and private.
 - Set `ADMIN_PASSWORD_HASH` from the generated script output.
-- The build script automatically removes any lingering `next.config.ts` file before compiling to satisfy Vercel's requirements.
 
 Enjoy curating collaborations with CrossField!
