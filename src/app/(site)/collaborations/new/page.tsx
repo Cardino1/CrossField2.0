@@ -6,6 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { FiCheck, FiInfo } from "react-icons/fi";
 
 const collaborationSchema = z.object({
   type: z.enum(["RESEARCH", "OPEN_SOURCE_PROJECT", "STARTUP_COFOUNDER"]),
@@ -26,12 +27,16 @@ export default function PublishCollaborationPage() {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    watch,
   } = useForm<CollaborationInput>({
     resolver: zodResolver(collaborationSchema),
     defaultValues: {
       type: "RESEARCH",
     },
   });
+
+  const description = watch("description");
+  const descriptionLength = description?.length || 0;
 
   const onSubmit = async (values: CollaborationInput) => {
     setSubmitted(false);
@@ -59,60 +64,155 @@ export default function PublishCollaborationPage() {
   return (
     <div className="container-grid py-12">
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
-        <div className="card space-y-4 p-8">
-          <span className="badge-soft">Guidance</span>
-          <h1 className="text-3xl font-semibold text-slate-900">Publish a collaboration request</h1>
-          <ul className="space-y-3 text-sm text-slate-600">
-            <li>• Share a concise but descriptive brief.</li>
-            <li>• Include timelines, desired outcomes, and required skills.</li>
-            <li>• Add any supporting links to context or previous work.</li>
-            <li>• We’ll review and approve within 24 hours.</li>
-          </ul>
+        <div className="space-y-6">
+          <div className="card space-y-6 p-8 animate-slide-up">
+            <div className="flex items-center gap-2">
+              <div className="rounded-lg bg-gradient-to-br from-brand-50 to-blue-50 p-2 ring-1 ring-brand-200/50">
+                <FiInfo className="h-5 w-5 text-brand-600" />
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900">Submission Guidelines</h1>
+            </div>
+            <ul className="space-y-4 text-sm text-slate-600">
+              <li className="flex gap-3">
+                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-brand-600" />
+                </div>
+                <span className="leading-relaxed">Share a concise but descriptive brief that clearly outlines your request.</span>
+              </li>
+              <li className="flex gap-3">
+                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-brand-600" />
+                </div>
+                <span className="leading-relaxed">Include timelines, desired outcomes, and required skills or expertise.</span>
+              </li>
+              <li className="flex gap-3">
+                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-brand-600" />
+                </div>
+                <span className="leading-relaxed">Add supporting links to context, previous work, or relevant materials.</span>
+              </li>
+              <li className="flex gap-3">
+                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
+                  <div className="h-2 w-2 rounded-full bg-brand-600" />
+                </div>
+                <span className="leading-relaxed">We'll review and approve quality submissions within 24 hours.</span>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="card p-8">
+        
+        <div className="card p-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-600">Type</label>
-              <select {...register("type")}>
+              <label className="text-sm font-semibold text-slate-700">
+                Collaboration Type <span className="text-rose-500">*</span>
+              </label>
+              <select {...register("type")} className={errors.type ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}>
                 <option value="RESEARCH">Research</option>
                 <option value="OPEN_SOURCE_PROJECT">Open Source Project</option>
                 <option value="STARTUP_COFOUNDER">Startup Co-Founder</option>
               </select>
-              {errors.type && <p className="text-sm text-rose-500">{errors.type.message}</p>}
+              {errors.type && (
+                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  {errors.type.message}
+                </p>
+              )}
             </div>
+            
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-600">Title</label>
-              <input placeholder="What is the request about?" {...register("title")} />
-              {errors.title && <p className="text-sm text-rose-500">{errors.title.message}</p>}
+              <label className="text-sm font-semibold text-slate-700">
+                Title <span className="text-rose-500">*</span>
+              </label>
+              <input 
+                placeholder="What is the request about?" 
+                {...register("title")} 
+                className={errors.title ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+              />
+              {errors.title && (
+                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  {errors.title.message}
+                </p>
+              )}
             </div>
+            
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-600">Full Name</label>
-                <input placeholder="Your name" {...register("fullName")} />
-                {errors.fullName && <p className="text-sm text-rose-500">{errors.fullName.message}</p>}
+                <label className="text-sm font-semibold text-slate-700">
+                  Full Name <span className="text-rose-500">*</span>
+                </label>
+                <input 
+                  placeholder="Your name" 
+                  {...register("fullName")} 
+                  className={errors.fullName ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+                />
+                {errors.fullName && (
+                  <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                    {errors.fullName.message}
+                  </p>
+                )}
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-600">Organization</label>
+                <label className="text-sm font-semibold text-slate-700">Organization</label>
                 <input placeholder="Optional" {...register("organization")} />
-                {errors.organization && <p className="text-sm text-rose-500">{errors.organization.message}</p>}
+                {errors.organization && (
+                  <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                    {errors.organization.message}
+                  </p>
+                )}
               </div>
             </div>
+            
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-600">Description</label>
-              <textarea rows={6} placeholder="Include goals, timelines, and ideal partners" {...register("description")} />
-              {errors.description && <p className="text-sm text-rose-500">{errors.description.message}</p>}
+              <div className="flex items-center justify-between">
+                <label className="text-sm font-semibold text-slate-700">
+                  Description <span className="text-rose-500">*</span>
+                </label>
+                <span className="text-xs text-slate-500">
+                  {descriptionLength}/2000 characters
+                </span>
+              </div>
+              <textarea 
+                rows={6} 
+                placeholder="Include goals, timelines, and ideal partners" 
+                {...register("description")}
+                className={errors.description ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+              />
+              {errors.description && (
+                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  {errors.description.message}
+                </p>
+              )}
             </div>
+            
             <div className="space-y-2">
-              <label className="text-sm font-medium text-slate-600">Link (optional)</label>
-              <input placeholder="https://" {...register("link")} />
-              {errors.link && <p className="text-sm text-rose-500">{errors.link.message}</p>}
+              <label className="text-sm font-semibold text-slate-700">Link (optional)</label>
+              <input 
+                placeholder="https://" 
+                {...register("link")}
+                className={errors.link ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+              />
+              {errors.link && (
+                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  {errors.link.message}
+                </p>
+              )}
             </div>
+            
             <button
               type="submit"
-              className="w-full rounded-xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-700"
-              disabled={isSubmitting}
+              className="btn-primary w-full flex items-center justify-center gap-2"
+              disabled={isSubmitting || submitted}
             >
-              {isSubmitting ? "Submitting..." : submitted ? "Submitted. It will appear once approved." : "Submit for Review"}
+              {isSubmitting ? (
+                "Submitting..."
+              ) : submitted ? (
+                <>
+                  <FiCheck className="h-4 w-4" />
+                  Submitted successfully!
+                </>
+              ) : (
+                "Submit for Review"
+              )}
             </button>
           </form>
         </div>
