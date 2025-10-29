@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "postinstall": "node scripts/cleanup-next-config.js",
-    "build": "node scripts/cleanup-next-config.js && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prisma:migrate": "prisma migrate dev",
