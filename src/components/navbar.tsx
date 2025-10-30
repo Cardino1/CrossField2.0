@@ -7,7 +7,6 @@ import { GetUpdatesModal } from "./get-updates-modal";
 import clsx from "clsx";
 
 const navItems = [
-  { href: "/", label: "Home" },
   { href: "/collaborations", label: "Collaborations" },
   { href: "/news", label: "News" },
 ];

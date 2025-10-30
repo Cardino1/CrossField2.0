@@ -7,6 +7,15 @@ CrossField is a Next.js 14 application for curating collaboration opportunities,
 
 ## Recent Changes
 
+### October 30, 2025 - Homepage Redesign & Navigation Updates
+- **Navigation Simplification**: Removed "Home" tab from navigation menu (only Collaborations and News tabs remain)
+- **Homepage Hero Update**: Changed hero heading to "The World's First Hub Of Tech and Research Collaborations."
+- **Homepage Content**: Simplified homepage to focus on mission statement with prominent "Explore" button
+  - Added detailed subtitle: "A one-stop shop for founders and scientists to stay up to date with the latest projects in both academia and the startup world. We curate frontier projects that are pushing the boundaries across scientific fields."
+  - Removed posts display, Recent News section, and empty state messages
+  - Single prominent "Explore" button that redirects to Collaborations page
+- **Authentication Fix**: Updated cookie settings for Replit's cross-origin iframe environment (sameSite: "none", secure: true)
+
 ### October 30, 2025 - Monochrome Design System
 - **Design Overhaul**: Complete redesign with minimal black and white aesthetic
   - Removed all blue/gradient colors from design system
