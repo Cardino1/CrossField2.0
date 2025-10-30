@@ -6,7 +6,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
-import type { CollaborationDto, NewsDto, PostDto, SubscriberDto } from "@/lib/dtos";
+import { CollaborationDto, NewsDto, PostDto, SubscriberDto } from "@/lib/dtos";
 
 const postSchema = z.object({
   id: z.string().optional(),
