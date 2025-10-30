@@ -74,10 +74,12 @@ export function GetUpdatesModal({ open, onClose }: { open: boolean; onClose: () 
               type="email"
               placeholder="you@company.com"
               {...register("email")}
+              aria-invalid={errors.email ? "true" : "false"}
+              aria-describedby={errors.email ? "subscribe-email-error" : undefined}
               className={errors.email ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
             />
             {errors.email && (
-              <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+              <p id="subscribe-email-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                 {errors.email.message}
               </p>
             )}

@@ -104,32 +104,41 @@ export default function PublishCollaborationPage() {
         <div className="card p-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-700">
+              <label htmlFor="collab-type" className="text-sm font-semibold text-slate-700">
                 Collaboration Type <span className="text-rose-500">*</span>
               </label>
-              <select {...register("type")} className={errors.type ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}>
+              <select 
+                id="collab-type"
+                {...register("type")} 
+                aria-invalid={errors.type ? "true" : "false"}
+                aria-describedby={errors.type ? "collab-type-error" : undefined}
+                className={errors.type ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+              >
                 <option value="RESEARCH">Research</option>
                 <option value="OPEN_SOURCE_PROJECT">Open Source Project</option>
                 <option value="STARTUP_COFOUNDER">Startup Co-Founder</option>
               </select>
               {errors.type && (
-                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                <p id="collab-type-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                   {errors.type.message}
                 </p>
               )}
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-700">
+              <label htmlFor="collab-title" className="text-sm font-semibold text-slate-700">
                 Title <span className="text-rose-500">*</span>
               </label>
               <input 
+                id="collab-title"
                 placeholder="What is the request about?" 
                 {...register("title")} 
+                aria-invalid={errors.title ? "true" : "false"}
+                aria-describedby={errors.title ? "collab-title-error" : undefined}
                 className={errors.title ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
               />
               {errors.title && (
-                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                <p id="collab-title-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                   {errors.title.message}
                 </p>
               )}
@@ -137,25 +146,36 @@ export default function PublishCollaborationPage() {
             
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700">
+                <label htmlFor="collab-fullname" className="text-sm font-semibold text-slate-700">
                   Full Name <span className="text-rose-500">*</span>
                 </label>
                 <input 
+                  id="collab-fullname"
                   placeholder="Your name" 
                   {...register("fullName")} 
+                  aria-invalid={errors.fullName ? "true" : "false"}
+                  aria-describedby={errors.fullName ? "collab-fullname-error" : undefined}
                   className={errors.fullName ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
                 />
                 {errors.fullName && (
-                  <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  <p id="collab-fullname-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                     {errors.fullName.message}
                   </p>
                 )}
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700">Organization</label>
-                <input placeholder="Optional" {...register("organization")} />
+                <label htmlFor="collab-org" className="text-sm font-semibold text-slate-700">
+                  Organization
+                </label>
+                <input 
+                  id="collab-org"
+                  placeholder="Optional" 
+                  {...register("organization")} 
+                  aria-invalid={errors.organization ? "true" : "false"}
+                  aria-describedby={errors.organization ? "collab-org-error" : undefined}
+                />
                 {errors.organization && (
-                  <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                  <p id="collab-org-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                     {errors.organization.message}
                   </p>
                 )}
@@ -164,35 +184,43 @@ export default function PublishCollaborationPage() {
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-semibold text-slate-700">
+                <label htmlFor="collab-desc" className="text-sm font-semibold text-slate-700">
                   Description <span className="text-rose-500">*</span>
                 </label>
-                <span className="text-xs text-slate-500">
+                <span className="text-xs text-slate-500" aria-live="polite">
                   {descriptionLength}/2000 characters
                 </span>
               </div>
               <textarea 
+                id="collab-desc"
                 rows={6} 
                 placeholder="Include goals, timelines, and ideal partners" 
                 {...register("description")}
+                aria-invalid={errors.description ? "true" : "false"}
+                aria-describedby={errors.description ? "collab-desc-error" : undefined}
                 className={errors.description ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
               />
               {errors.description && (
-                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                <p id="collab-desc-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                   {errors.description.message}
                 </p>
               )}
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-semibold text-slate-700">Link (optional)</label>
+              <label htmlFor="collab-link" className="text-sm font-semibold text-slate-700">
+                Link (optional)
+              </label>
               <input 
+                id="collab-link"
                 placeholder="https://" 
                 {...register("link")}
+                aria-invalid={errors.link ? "true" : "false"}
+                aria-describedby={errors.link ? "collab-link-error" : undefined}
                 className={errors.link ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
               />
               {errors.link && (
-                <p className="flex items-center gap-1 text-sm font-medium text-rose-600">
+                <p id="collab-link-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
                   {errors.link.message}
                 </p>
               )}
