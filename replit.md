@@ -7,6 +7,15 @@ CrossField is a Next.js 14 application for curating collaboration opportunities,
 
 ## Recent Changes
 
+### October 30, 2025 - Monochrome Design System
+- **Design Overhaul**: Complete redesign with minimal black and white aesthetic
+  - Removed all blue/gradient colors from design system
+  - Updated all components (navbar, hero, cards, forms, modals) to use monochrome palette
+  - Simplified shadows, borders, and visual effects
+  - Clean, sleek, and minimal user interface
+- **Modal Improvements**: Fixed Get Updates modal overlay with proper centering and dismiss functionality
+- **Accessibility**: Maintained full accessibility compliance (ARIA attributes, label associations, keyboard navigation)
+
 ### October 29, 2025 - Vercel to Replit Migration
 - **Database Migration**: Converted from SQLite to PostgreSQL to support enums and array fields
 - **Configuration Updates**: 
