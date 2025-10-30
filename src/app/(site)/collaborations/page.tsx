@@ -6,6 +6,7 @@ import { EmptyState } from "@/components/empty-state";
 import { prisma } from "@/lib/prisma";
 import { getAdminSession } from "@/lib/auth";
 import { CollaborationStatus, CollaborationType } from "@prisma/client";
+import type { CollaborationDto } from "@/lib/dtos";
 import { FiUsers } from "react-icons/fi";
 
 const PAGE_SIZE = 6;
@@ -50,6 +51,12 @@ export default async function CollaborationsPage({
       take: PAGE_SIZE,
     }),
   ]);
+
+  const collaborationItems: CollaborationDto[] = items.map((item) => ({
+    ...item,
+    createdAt: item.createdAt.toISOString(),
+    updatedAt: item.updatedAt.toISOString(),
+  }));
 
   return (
     <div className="container-grid space-y-10 py-12">
@@ -100,18 +107,14 @@ export default async function CollaborationsPage({
       )}
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {items.map((collaboration) => (
+        {collaborationItems.map((collaboration) => (
           <CollaborationCard
             key={collaboration.id}
-            collaboration={{
-              ...collaboration,
-              createdAt: collaboration.createdAt,
-              updatedAt: collaboration.updatedAt,
-            }}
+            collaboration={collaboration}
             showStatus={Boolean(adminSession)}
           />
         ))}
-        {items.length === 0 && (
+        {collaborationItems.length === 0 && (
           <div className="col-span-full">
             <EmptyState
               icon={<FiUsers className="h-12 w-12 text-slate-400" />}

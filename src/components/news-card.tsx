@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { format } from "date-fns";
 import { FiArrowRight } from "react-icons/fi";
+import type { NewsDto } from "@/lib/dtos";
 
-export type NewsCardProps = {
-  id: string;
-  title: string;
-  slug: string;
-  summary?: string | null;
-  publishedAt: string | Date;
-};
+export type NewsCardProps = Pick<
+  NewsDto,
+  "id" | "title" | "slug" | "summary" | "publishedAt" | "createdAt" | "updatedAt"
+>;
 
 export function NewsCard({ title, slug, summary, publishedAt }: NewsCardProps) {
   return (
