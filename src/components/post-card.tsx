@@ -2,16 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { format } from "date-fns";
 import { FiArrowRight } from "react-icons/fi";
+import type { PostDto } from "@/lib/dtos";
 
-export type PostCardProps = {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt?: string | null;
-  imageUrl?: string | null;
-  tags: string[];
-  createdAt: string | Date;
-};
+export type PostCardProps = Pick<
+  PostDto,
+  "id" | "title" | "slug" | "excerpt" | "imageUrl" | "tags" | "createdAt" | "updatedAt"
+>;
 
 export function PostCard({ title, slug, excerpt, imageUrl, tags, createdAt }: PostCardProps) {
   return (

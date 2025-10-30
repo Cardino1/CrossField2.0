@@ -1,10 +1,14 @@
 import { formatDistanceToNow } from "date-fns";
-import { Collaboration, CollaborationStatus } from "@prisma/client";
+import { CollaborationStatus } from "@prisma/client";
+import type { CollaborationDto } from "@/lib/dtos";
 import { TypeBadge } from "./type-badge";
 import { FiExternalLink } from "react-icons/fi";
 
 export type CollaborationCardProps = {
-  collaboration: Pick<Collaboration, "id" | "title" | "type" | "organization" | "description" | "link" | "createdAt" | "status">;
+  collaboration: Pick<
+    CollaborationDto,
+    "id" | "title" | "type" | "organization" | "description" | "link" | "createdAt" | "updatedAt" | "status"
+  >;
   showStatus?: boolean;
 };
 
