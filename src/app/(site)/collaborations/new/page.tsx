@@ -65,47 +65,39 @@ export default function PublishCollaborationPage() {
     <div className="container-grid py-12">
       <div className="grid gap-8 lg:grid-cols-[1fr_1.5fr]">
         <div className="space-y-6">
-          <div className="card space-y-6 p-8 animate-slide-up">
-            <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-gradient-to-br from-brand-50 to-blue-50 p-2 ring-1 ring-brand-200/50">
-                <FiInfo className="h-5 w-5 text-brand-600" />
+          <div className="card space-y-5 p-6">
+            <div className="flex items-center gap-3">
+              <div className="rounded-lg bg-slate-100 p-2">
+                <FiInfo className="h-5 w-5 text-slate-600" />
               </div>
-              <h1 className="text-2xl font-bold text-slate-900">Submission Guidelines</h1>
+              <h1 className="text-xl font-semibold text-slate-950">Submission Guidelines</h1>
             </div>
-            <ul className="space-y-4 text-sm text-slate-600">
+            <ul className="space-y-3 text-sm text-slate-600">
               <li className="flex gap-3">
-                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-brand-600" />
-                </div>
-                <span className="leading-relaxed">Share a concise but descriptive brief that clearly outlines your request.</span>
+                <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-950" />
+                <span>Share a concise but descriptive brief that clearly outlines your request.</span>
               </li>
               <li className="flex gap-3">
-                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-brand-600" />
-                </div>
-                <span className="leading-relaxed">Include timelines, desired outcomes, and required skills or expertise.</span>
+                <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-950" />
+                <span>Include timelines, desired outcomes, and required skills or expertise.</span>
               </li>
               <li className="flex gap-3">
-                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-brand-600" />
-                </div>
-                <span className="leading-relaxed">Add supporting links to context, previous work, or relevant materials.</span>
+                <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-950" />
+                <span>Add supporting links to context, previous work, or relevant materials.</span>
               </li>
               <li className="flex gap-3">
-                <div className="mt-0.5 h-5 w-5 flex-shrink-0 rounded-full bg-brand-100 flex items-center justify-center">
-                  <div className="h-2 w-2 rounded-full bg-brand-600" />
-                </div>
-                <span className="leading-relaxed">We'll review and approve quality submissions within 24 hours.</span>
+                <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-950" />
+                <span>We'll review and approve quality submissions within 24 hours.</span>
               </li>
             </ul>
           </div>
         </div>
         
-        <div className="card p-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <form className="grid gap-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="card p-6">
+          <form className="grid gap-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="space-y-2">
-              <label htmlFor="collab-type" className="text-sm font-semibold text-slate-700">
-                Collaboration Type <span className="text-rose-500">*</span>
+              <label htmlFor="collab-type" className="text-sm font-medium text-slate-950">
+                Collaboration Type <span className="text-rose-600">*</span>
               </label>
               <select 
                 id="collab-type"
@@ -126,8 +118,8 @@ export default function PublishCollaborationPage() {
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="collab-title" className="text-sm font-semibold text-slate-700">
-                Title <span className="text-rose-500">*</span>
+              <label htmlFor="collab-title" className="text-sm font-medium text-slate-950">
+                Title <span className="text-rose-600">*</span>
               </label>
               <input 
                 id="collab-title"
@@ -146,8 +138,8 @@ export default function PublishCollaborationPage() {
             
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
-                <label htmlFor="collab-fullname" className="text-sm font-semibold text-slate-700">
-                  Full Name <span className="text-rose-500">*</span>
+                <label htmlFor="collab-fullname" className="text-sm font-medium text-slate-950">
+                  Full Name <span className="text-rose-600">*</span>
                 </label>
                 <input 
                   id="collab-fullname"
@@ -164,7 +156,7 @@ export default function PublishCollaborationPage() {
                 )}
               </div>
               <div className="space-y-2">
-                <label htmlFor="collab-org" className="text-sm font-semibold text-slate-700">
+                <label htmlFor="collab-org" className="text-sm font-medium text-slate-950">
                   Organization
                 </label>
                 <input 
@@ -184,8 +176,8 @@ export default function PublishCollaborationPage() {
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label htmlFor="collab-desc" className="text-sm font-semibold text-slate-700">
-                  Description <span className="text-rose-500">*</span>
+                <label htmlFor="collab-desc" className="text-sm font-medium text-slate-950">
+                  Description <span className="text-rose-600">*</span>
                 </label>
                 <span className="text-xs text-slate-500" aria-live="polite">
                   {descriptionLength}/2000 characters
@@ -208,7 +200,7 @@ export default function PublishCollaborationPage() {
             </div>
             
             <div className="space-y-2">
-              <label htmlFor="collab-link" className="text-sm font-semibold text-slate-700">
+              <label htmlFor="collab-link" className="text-sm font-medium text-slate-950">
                 Link (optional)
               </label>
               <input 

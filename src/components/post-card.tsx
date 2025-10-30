@@ -16,33 +16,28 @@ export type PostCardProps = {
 export function PostCard({ title, slug, excerpt, imageUrl, tags, createdAt }: PostCardProps) {
   return (
     <Link href={`/posts/${slug}`}>
-      <article className="card overflow-hidden group animate-slide-up">
+      <article className="card overflow-hidden group">
         {imageUrl ? (
-          <div className="relative h-52 w-full overflow-hidden">
+          <div className="relative h-48 w-full overflow-hidden bg-slate-100">
             <Image 
               src={imageUrl} 
               alt={title} 
               fill 
-              className="object-cover transition-transform duration-500 group-hover:scale-110" 
+              className="object-cover" 
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         ) : (
-          <div className="relative h-52 w-full overflow-hidden bg-gradient-to-br from-brand-50 via-blue-50 to-cyan-50">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-24 w-24 rounded-full bg-brand-200/30 blur-2xl" />
-            </div>
-          </div>
+          <div className="relative h-48 w-full bg-slate-100" />
         )}
-        <div className="space-y-4 p-6">
+        <div className="space-y-4 p-5">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-xs text-slate-500">
               {format(new Date(createdAt), "MMM d, yyyy")}
             </span>
             {tags?.length > 0 && (
               <>
                 <span className="text-slate-300">•</span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {tags.slice(0, 3).map((tag) => (
                     <span key={tag} className="badge-soft text-xs">
                       {tag}
@@ -53,7 +48,7 @@ export function PostCard({ title, slug, excerpt, imageUrl, tags, createdAt }: Po
             )}
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-bold text-slate-900 group-hover:text-brand-600 transition-colors duration-200">
+            <h3 className="text-lg font-semibold text-slate-950">
               {title}
             </h3>
             {excerpt && (
@@ -62,7 +57,7 @@ export function PostCard({ title, slug, excerpt, imageUrl, tags, createdAt }: Po
               </p>
             )}
           </div>
-          <div className="flex items-center gap-2 text-sm font-semibold text-brand-600 group-hover:gap-3 transition-all duration-200">
+          <div className="flex items-center gap-2 text-sm font-medium text-slate-950">
             Read more <FiArrowRight className="h-4 w-4" />
           </div>
         </div>

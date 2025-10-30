@@ -17,27 +17,26 @@ export function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/60 bg-white/90 backdrop-blur-xl transition-all duration-200">
+    <header className="sticky top-0 z-30 border-b border-slate-200 bg-white">
       <div className="container-grid">
         <div className="flex items-center justify-between py-4">
-          <Link href="/" className="group flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-brand-500 to-blue-600 shadow-lg transition-transform duration-200 group-hover:scale-110" />
-            <span className="text-xl font-bold tracking-tight text-slate-900">
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl font-semibold tracking-tight text-slate-950">
               CrossField
             </span>
           </Link>
-          <nav className="hidden items-center gap-2 text-sm font-medium text-slate-600 md:flex">
+          <nav className="hidden items-center gap-1 text-sm font-medium text-slate-600 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="rounded-xl px-4 py-2 transition-all duration-200 hover:bg-slate-100 hover:text-slate-900"
+                className="rounded-lg px-3 py-2 transition-colors hover:bg-slate-100 hover:text-slate-950"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center md:flex">
             <button
               onClick={() => setOpen(true)}
               className="btn-primary"
@@ -46,7 +45,7 @@ export function Navbar() {
             </button>
           </div>
           <button
-            className="rounded-xl border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
+            className="rounded-lg border border-slate-200 p-2 text-slate-600 transition-colors hover:bg-slate-100 md:hidden"
             onClick={() => setDrawerOpen((prev) => !prev)}
             aria-label="Open navigation"
           >
@@ -57,15 +56,15 @@ export function Navbar() {
       <div
         className={clsx(
           "md:hidden transition-all duration-300",
-          drawerOpen ? "max-h-96 border-t border-slate-200 bg-white/95 backdrop-blur-xl" : "max-h-0 overflow-hidden"
+          drawerOpen ? "max-h-96 border-t border-slate-200 bg-white" : "max-h-0 overflow-hidden"
         )}
       >
-        <div className="container-grid flex flex-col gap-2 py-4">
+        <div className="container-grid flex flex-col gap-1 py-4">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-xl px-4 py-3 text-sm font-semibold text-slate-600 transition-colors hover:bg-slate-100"
+              className="rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100"
               onClick={() => setDrawerOpen(false)}
             >
               {item.label}

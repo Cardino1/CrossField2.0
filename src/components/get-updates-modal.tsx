@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { FiMail, FiCheck } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 
 const subscribeSchema = z.object({
   email: z
@@ -40,6 +40,10 @@ export function GetUpdatesModal({ open, onClose }: { open: boolean; onClose: () 
       setSuccess(true);
       toast.success("You're on the list!");
       reset();
+      setTimeout(() => {
+        onClose();
+        setSuccess(false);
+      }, 1500);
     } else {
       const data = await res.json().catch(() => ({ message: "Something went wrong" }));
       toast.error(data.message ?? "Unable to subscribe");
@@ -50,23 +54,23 @@ export function GetUpdatesModal({ open, onClose }: { open: boolean; onClose: () 
 
   return (
     <div className="modal-overlay" role="dialog" aria-modal="true" onClick={onClose}>
-      <div className="modal-card space-y-6" onClick={(e) => e.stopPropagation()}>
-        <div className="flex flex-col items-center gap-4 text-center">
-          <div className="rounded-2xl bg-gradient-to-br from-brand-50 to-blue-50 p-4 ring-1 ring-brand-200/50">
-            {success ? (
-              <FiCheck className="h-10 w-10 text-brand-600" />
-            ) : (
-              <FiMail className="h-10 w-10 text-brand-600" />
-            )}
+      <div className="modal-card" onClick={(e) => e.stopPropagation()}>
+        <div className="mb-6 flex items-start justify-between">
+          <div>
+            <h3 className="text-xl font-semibold text-slate-950">Get Updates</h3>
+            <p className="mt-1 text-sm text-slate-600">Stay informed about new collaborations and posts.</p>
           </div>
-          <div className="space-y-2">
-            <h3 className="text-2xl font-bold text-slate-900">Get CrossField Updates</h3>
-            <p className="text-sm text-slate-600">We never spam — expect thoughtful drops, and check spam just in case.</p>
-          </div>
+          <button 
+            onClick={onClose} 
+            className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-600"
+            aria-label="Close"
+          >
+            <FiX className="h-5 w-5" />
+          </button>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-semibold text-slate-700" htmlFor="subscribe-email">
+            <label className="text-sm font-medium text-slate-950" htmlFor="subscribe-email">
               Email address
             </label>
             <input
@@ -76,30 +80,21 @@ export function GetUpdatesModal({ open, onClose }: { open: boolean; onClose: () 
               {...register("email")}
               aria-invalid={errors.email ? "true" : "false"}
               aria-describedby={errors.email ? "subscribe-email-error" : undefined}
-              className={errors.email ? "ring-2 ring-rose-500 focus:ring-rose-500" : ""}
+              className={errors.email ? "border-rose-500 focus:border-rose-500 focus:ring-rose-500" : ""}
             />
             {errors.email && (
-              <p id="subscribe-email-error" role="alert" className="flex items-center gap-1 text-sm font-medium text-rose-600">
+              <p id="subscribe-email-error" role="alert" className="text-sm font-medium text-rose-600">
                 {errors.email.message}
               </p>
             )}
           </div>
-          <div className="flex flex-col gap-2">
-            <button
-              type="submit"
-              className="btn-primary w-full"
-              disabled={isSubmitting || success}
-            >
-              {isSubmitting ? "Subscribing..." : success ? "You're on the list!" : "Subscribe"}
-            </button>
-            <button 
-              type="button" 
-              onClick={onClose} 
-              className="w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100"
-            >
-              Close
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="btn-primary w-full"
+            disabled={isSubmitting || success}
+          >
+            {isSubmitting ? "Subscribing..." : success ? "Subscribed!" : "Subscribe"}
+          </button>
         </form>
       </div>
     </div>
