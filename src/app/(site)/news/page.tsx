@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { NewsCard } from "@/components/news-card";
 import { EmptyState } from "@/components/empty-state";
+import type { NewsDto } from "@/lib/dtos";
 import { FiRss } from "react-icons/fi";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,13 @@ export default async function NewsIndexPage() {
     orderBy: { publishedAt: "desc" },
   });
 
+  const newsItems: NewsDto[] = news.map((item) => ({
+    ...item,
+    createdAt: item.createdAt.toISOString(),
+    updatedAt: item.updatedAt.toISOString(),
+    publishedAt: item.publishedAt.toISOString(),
+  }));
+
   return (
     <div className="container-grid space-y-8 py-12">
       <div className="space-y-3">
@@ -20,17 +28,19 @@ export default async function NewsIndexPage() {
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
-        {news.map((item) => (
+        {newsItems.map((item) => (
           <NewsCard
             key={item.id}
             id={item.id}
             title={item.title}
             slug={item.slug}
             summary={item.summary}
-            publishedAt={item.publishedAt.toISOString()}
+            publishedAt={item.publishedAt}
+            createdAt={item.createdAt}
+            updatedAt={item.updatedAt}
           />
         ))}
-        {news.length === 0 && (
+        {newsItems.length === 0 && (
           <div className="col-span-full">
             <EmptyState
               icon={<FiRss className="h-12 w-12 text-slate-400" />}

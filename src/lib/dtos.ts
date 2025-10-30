@@ -1,4 +1,4 @@
-import { Collaboration, News, Post, Subscriber } from "@prisma/client";
+import type { Collaboration, News, Post, Subscriber } from "@prisma/client";
 
 export type CollaborationDto = Omit<Collaboration, "createdAt" | "updatedAt"> & {
   createdAt: string;
