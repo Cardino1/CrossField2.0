@@ -37,7 +37,7 @@ export function LoginForm() {
     }
     toast.success("Welcome back");
     const redirectTo = params.get("from") ?? "/admin";
-    router.push(redirectTo);
+    window.location.href = redirectTo;
   };
 
   return (
